@@ -1,0 +1,35 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:layoutIssue="clr-namespace:LayoutIssue;assembly=LayoutIssue"
+             mc:Ignorable="d"
+             x:Class="LayoutIssue.MainPage">
+
+	<StackLayout>
+		<Label Text="Actively scroll up and down and watch the numbers randomly truncated because of RecycleElement caching strategy and HorizontalOptions=End. Surprisingly enough HorizontalTextAlignment works ok." TextColor="Blue"/>
+
+		<ListView CachingStrategy="RecycleElement" x:Name="listView">
+			<ListView.ItemTemplate>
+		        <DataTemplate x:DataType="{x:Type layoutIssue:DataItem}">
+					<ViewCell>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="90" />
+								<ColumnDefinition />
+								<ColumnDefinition />
+								<ColumnDefinition />
+							</Grid.ColumnDefinitions>
+
+							<Label Text="{Binding Date}" LineBreakMode="NoWrap" />
+							<Label Grid.Column="1" Text="{Binding Income}" HorizontalOptions="End" LineBreakMode="TailTruncation" />
+							<Label Grid.Column="2" Text="{Binding Expenses}" HorizontalOptions="End" LineBreakMode="TailTruncation" />
+							<Label Grid.Column="3" Text="{Binding Net}" HorizontalOptions="End" LineBreakMode="TailTruncation" />
+						</Grid>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>
